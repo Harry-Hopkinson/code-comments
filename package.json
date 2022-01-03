@@ -17,7 +17,7 @@
 		"commands": [
 			{
 				"command": "code-comments.helloWorld",
-				"title": "Hello World"
+				"title": "Code Comments"
 			}
 		]
 	},
