@@ -1,16 +1,23 @@
 import * as vscode from 'vscode';
 import "typescript";
+import "constants";
 
 let myStatusBar : vscode.StatusBarItem;
 
 export function activate({ subscriptions }: vscode.ExtensionContext) {
 	const codeCommentCommand = "code-comments.CodeComment";
 	subscriptions.push(vscode.commands.registerCommand(codeCommentCommand, () => {
-		vscode.window.activeTextEditor.edit(edit => {
-			let selection = vscode.window.activeTextEditor.selection;
-			let text = vscode.window.activeTextEditor.document.getText(selection);
-			edit.replace(selection, `// ${text}`);
-		});
+		const editor = vscode.window.activeTextEditor;
+		if (editor) {
+			const selection = editor.selection;
+			const text = editor.document.getText(selection);
+			const newText = `/* ${text} */`;
+			editor.edit(editBuilder => editBuilder.replace(selection, newText));
+			vscode.window.showInformationMessage("Code Comment Generated! 🎉");
+		}
+		else {
+			vscode.window.showErrorMessage("Not active file opened.");
+		}
 	}));
 
 	myStatusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);

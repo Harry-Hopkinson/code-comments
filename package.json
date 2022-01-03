@@ -10,7 +10,7 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:code-comments.CodeComment"
+    "onStartupFinished"
   ],
   "main": "./dist/extension.js",
   "contributes": {
