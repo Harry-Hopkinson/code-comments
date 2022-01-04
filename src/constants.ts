@@ -1,1 +1,0 @@
-export const codeCommentCommand = "code-comments.CodeComment";

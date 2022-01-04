@@ -39,10 +39,10 @@ export function activate({ subscriptions }: vscode.ExtensionContext) {
 		}
 	}));
 
+	// Status Bar and Updating the Status Bar
 	myStatusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
 	myStatusBar.command = codeCommentCommand;
 	subscriptions.push(myStatusBar);
-
 	subscriptions.push(vscode.window.onDidChangeActiveTextEditor(updateStatusBarItem));
 	subscriptions.push(vscode.window.onDidChangeTextEditorSelection(updateStatusBarItem));
 	updateStatusBarItem();
