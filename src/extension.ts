@@ -8,12 +8,23 @@ export function activate({ subscriptions }: vscode.ExtensionContext) {
 	const codeCommentCommand = "code-comments.CodeComment";
 	subscriptions.push(vscode.commands.registerCommand(codeCommentCommand, () => {
 		const editor = vscode.window.activeTextEditor;
+		const documentFileType = vscode.window.activeTextEditor?.document.languageId;
 		if (editor) {
-			const selection = editor.selection;
-			const text = editor.document.getText(selection);
-			const newText = `/* ${text} */`;
-			editor.edit(editBuilder => editBuilder.replace(selection, newText));
-			vscode.window.showInformationMessage("Code Comment Generated! 🎉");
+			if (documentFileType === "python") {
+				const selection = editor.selection;
+				const text = editor.document.getText(selection);
+				const comment = `# ${text}`;
+				editor.edit(editBuilder => {
+					editBuilder.replace(selection, comment);
+				});
+			}
+			else {
+				const selection = editor.selection;
+				const text = editor.document.getText(selection);
+				const newText = `/* ${text} */`;
+				editor.edit(editBuilder => editBuilder.replace(selection, newText));
+				vscode.window.showInformationMessage("Code Comment Generated! 🎉");
+			}
 		}
 		else {
 			vscode.window.showErrorMessage("Not active file opened.");
