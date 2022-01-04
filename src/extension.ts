@@ -18,13 +18,21 @@ export function activate({ subscriptions }: vscode.ExtensionContext) {
 					editBuilder.replace(selection, comment);
 				});
 			}
+			else if (documentFileType === "html") {
+				const selection = editor.selection;
+				const text = editor.document.getText(selection);
+				const comment = `<!-- ${text} -->`;
+				editor.edit(editBuilder => {
+					editBuilder.replace(selection, comment);
+				});
+			}
 			else {
 				const selection = editor.selection;
 				const text = editor.document.getText(selection);
 				const newText = `/* ${text} */`;
 				editor.edit(editBuilder => editBuilder.replace(selection, newText));
-				vscode.window.showInformationMessage("Code Comment Generated! 🎉");
 			}
+			vscode.window.showInformationMessage("Code Comment Generated! 🎉");
 		}
 		else {
 			vscode.window.showErrorMessage("Not active file opened.");
