@@ -16,5 +16,9 @@
 	"exclude": [
 		"node_modules",
 		".vscode-test"
+	],
+	"rootDir": "src",
+	"include": [
+		"src/**/*.ts"
 	]
 }

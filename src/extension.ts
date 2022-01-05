@@ -29,7 +29,7 @@ export function activate({ subscriptions }: vscode.ExtensionContext) {
 			else {
 				const selection = editor.selection;
 				const text = editor.document.getText(selection);
-				const newText = `/*\n${text}\n */`;
+				const newText = `/*\n${text}\n*/`;
 				editor.edit(editBuilder => editBuilder.replace(selection, newText));
 			}
 			vscode.window.showInformationMessage("Code Comment Generated! 🎉");
