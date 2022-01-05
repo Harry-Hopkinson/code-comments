@@ -11,4 +11,4 @@
 
 ### Screenshots
 
-![screenshots](images/screenshots.jpg)
+![screenshots](images/screenshot.JPG)
