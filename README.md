@@ -8,7 +8,3 @@
 </h1>
 
 <h4 align="center">A Code Commenter for VSCode.</h4>
-
-### Screenshots
-
-![screenshots](images/screenshot.JPG)
