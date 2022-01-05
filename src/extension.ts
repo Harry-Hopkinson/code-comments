@@ -13,9 +13,9 @@ export function activate({ subscriptions }: vscode.ExtensionContext) {
 			if (documentFileType === "python") {
 				const selection = editor.selection;
 				const text = editor.document.getText(selection);
-				const comment = `# ${text}`;
+				const newText = `'''\n${text}\n'''`;
 				editor.edit(editBuilder => {
-					editBuilder.replace(selection, comment);
+					editBuilder.replace(selection, newText);
 				});
 			}
 			else if (documentFileType === "html") {
@@ -29,7 +29,7 @@ export function activate({ subscriptions }: vscode.ExtensionContext) {
 			else {
 				const selection = editor.selection;
 				const text = editor.document.getText(selection);
-				const newText = `/* ${text} */`;
+				const newText = `/*\n${text}\n */`;
 				editor.edit(editBuilder => editBuilder.replace(selection, newText));
 			}
 			vscode.window.showInformationMessage("Code Comment Generated! 🎉");
