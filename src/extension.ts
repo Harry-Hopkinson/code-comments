@@ -10,32 +10,37 @@ export function activate({ subscriptions }: vscode.ExtensionContext) {
 		const editor = vscode.window.activeTextEditor;
 		const documentFileType = vscode.window.activeTextEditor?.document.languageId;
 		if (editor) {
-			if (documentFileType === "python") {
-				const selection = editor.selection;
-				const text = editor.document.getText(selection);
-				const newText = `'''\n${text}\n'''`;
-				editor.edit(editBuilder => {
-					editBuilder.replace(selection, newText);
-				});
-			}
-			else if (documentFileType === "html") {
-				const selection = editor.selection;
-				const text = editor.document.getText(selection);
-				const comment = `<!-- ${text} -->`;
-				editor.edit(editBuilder => {
-					editBuilder.replace(selection, comment);
-				});
-			}
+			if (editor.selection.isEmpty) {
+				vscode.window.showInformationMessage("Please select Text to Comment...");
+			} 
 			else {
-				const selection = editor.selection;
-				const text = editor.document.getText(selection);
-				const newText = `/*\n${text}\n*/`;
-				editor.edit(editBuilder => editBuilder.replace(selection, newText));
+				if (documentFileType === "python") {
+					const selection = editor.selection;
+					const text = editor.document.getText(selection);
+					const newText = `'''\n${text}\n'''`;
+					editor.edit(editBuilder => {
+						editBuilder.replace(selection, newText);
+					});
+				}
+				else if (documentFileType === "html") {
+					const selection = editor.selection;
+					const text = editor.document.getText(selection);
+					const comment = `<!-- ${text} -->`;
+					editor.edit(editBuilder => {
+						editBuilder.replace(selection, comment);
+					});
+				}
+				else {
+					const selection = editor.selection;
+					const text = editor.document.getText(selection);
+					const newText = `/*\n${text}\n*/`;
+					editor.edit(editBuilder => editBuilder.replace(selection, newText));
+				}
+				vscode.window.showInformationMessage("Code Comment Generated! 🎉");
 			}
-			vscode.window.showInformationMessage("Code Comment Generated! 🎉");
 		}
 		else {
-			vscode.window.showErrorMessage("Not active file opened.");
+			vscode.window.showInformationMessage("Please open a file to Comment...");
 		}
 	}));
 
