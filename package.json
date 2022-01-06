@@ -2,7 +2,7 @@
   "name": "code-comments",
   "displayName": "Code Comments",
   "description": "Generates code comments based on highlighted code.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.63.0"
   },
