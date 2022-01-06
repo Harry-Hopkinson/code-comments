@@ -30,6 +30,14 @@ export function activate({ subscriptions }: vscode.ExtensionContext) {
 						editBuilder.replace(selection, comment);
 					});
 				}
+				else if (documentFileType === "java") {
+					const selection = editor.selection;
+					const text = editor.document.getText(selection);
+					const comment = `/* ${text} */`;
+					editor.edit(editBuilder => {
+						editBuilder.replace(selection, comment);
+					});
+				}
 				else {
 					const selection = editor.selection;
 					const text = editor.document.getText(selection);
